@@ -1,5 +1,4 @@
 // @flow
-import A from './A';
 import AppError from './AppError';
 import Baseline from './Baseline';
 import Box from './Box';
@@ -45,9 +44,10 @@ const PageFooter = () => (
     paddingVertical={1}
     size={-1}
   >
-    <FormattedMessage defaultMessage="made by" id="footer.madeBy" />{' '}
-    <A href="https://twitter.com/steida">steida</A>
-    {', '}
+    <FormattedMessage
+      defaultMessage="© Equa bank a.s. 2011 - 2017. Všechna práva vyhrazena."
+      id="footer.text"
+    />{' '}
     <SwitchLocale />
   </Text>
 );

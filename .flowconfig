@@ -1,3 +1,28 @@
 [ignore]
 ; https://github.com/oliviertassinari/babel-plugin-transform-react-remove-prop-types/issues/107
 .*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
+; https://github.com/graphql/graphql-js/issues/1020
+.*/node_modules/graphql/.*
+.*/node_modules/graphql-language-service-utils/.*
+.*/node_modules/graphql-language-service-interface/.*
+.*/node_modules/graphql-language-service-types/.*
+.*/node_modules/graphql-language-service-config/.*
+.*/node_modules/graphql-language-service-parser/.*
+.*/node_modules/graphql-tag/.*
+
+
+[include]
+
+[libs]
+types/app.js.flow
+
+[lints]
+all=warn
+sketchy-null-bool=off
+sketchy-null-mixed=off
+sketchy-null-string=off
+
+[options]
+include_warnings=true
+; TODO: https://github.com/facebook/flow/issues/3728
+;all=true

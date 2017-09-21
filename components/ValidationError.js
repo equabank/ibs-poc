@@ -61,6 +61,13 @@ const getValidationErrorMessage = error => {
           id="validationError.wrongPassword"
         />
       );
+    case 'numeric':
+      return (
+        <FormattedMessage
+          defaultMessage="Please only numbers."
+          id="validationError.numeric"
+        />
+      );
     default:
       // https://flow.org/en/docs/react/redux/#toc-typing-redux-reducers
       // eslint-disable-next-line no-unused-expressions

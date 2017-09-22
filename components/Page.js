@@ -2,6 +2,7 @@
 import AppError from './AppError';
 import Baseline from './Baseline';
 import Box from './Box';
+import Button from './Button';
 import Head from 'next/head';
 import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
@@ -13,6 +14,7 @@ import { FormattedMessage } from 'react-intl';
 import { ThemeProvider } from 'react-fela';
 import { browserTheme, browserThemeDark } from '../themes/browserTheme';
 import { connect, type Connector } from 'react-redux';
+import { deleteCookie } from '../lib/cookie';
 
 const PageContainer = ({ children }) => (
   <Box
@@ -34,6 +36,14 @@ const PageBody = ({ children }) => (
   </Box>
 );
 
+const signOut = () => {
+  deleteCookie();
+  // Force full reload. Purging Relay environment and Redux store is not enough.
+  // Sensitive session data can be stored in NEXT_PROPS or elsewhere.
+  // eslint-disable-next-line no-undef
+  location.href = '/';
+};
+
 const PageFooter = () => (
   <Text
     borderColor="gray"
@@ -49,6 +59,10 @@ const PageFooter = () => (
       id="footer.text"
     />{' '}
     <SwitchLocale />
+    {', '}
+    <Button size={-1} paddingHorizontal={0} onPress={signOut}>
+      Logout
+    </Button>
   </Text>
 );
 

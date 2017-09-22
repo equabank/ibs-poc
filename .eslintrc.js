@@ -52,5 +52,6 @@ module.exports = {
     'react/prop-types': 0, // Flow.
     'react/require-default-props': 0, // Flow.
     'template-curly-spacing': 0, // Prettier.
+    'quote-props': 0, // Flow.
   },
 };

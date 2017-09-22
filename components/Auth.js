@@ -10,6 +10,10 @@ import TextInput from './TextInput';
 import { FormattedMessage } from 'react-intl';
 import { SignInButton } from './buttons';
 import * as validation from '../lib/validation';
+import { setCookie } from '../lib/cookie';
+import Router from 'next/router';
+import sitemap from '../lib/sitemap';
+// import isNumeric from 'validator/lib/isNumeric';
 
 type Fields = {
   loginNumber: string,
@@ -28,8 +32,50 @@ const initialState = {
   validationErrors: {},
 };
 
+// Mocked mutate
+type ServerLoginErrorResponse = {|
+  weird: {|
+    code: 123,
+  |},
+|};
+
+const users = {
+  '12345678': 'adminadmin',
+  '87654321': 'nimdanimda',
+};
+
+const mutate = (fields, onCompleted, onError) => {
+  setTimeout(() => {
+    const userExists = users[fields.loginNumber] === fields.password;
+    if (!userExists) {
+      onError({ weird: { code: 123 } });
+      return;
+    }
+    onCompleted();
+  }, 2000);
+};
+
 class Auth extends React.Component<{}, State> {
   state = initialState;
+
+  handleCompleted = () => {
+    this.setState(initialState);
+    setCookie({ token: '123', userId: '123' });
+    Router.replace(sitemap.payments.path);
+  };
+
+  handleError = (error: ServerLoginErrorResponse) => {
+    this.setState({ pending: false });
+    switch (error.weird.code) {
+      case 123:
+        this.setState({
+          validationErrors: {
+            password: { type: 'wrongPassword' },
+          },
+        });
+        break;
+    }
+  };
 
   signIn = () => {
     const fields = {
@@ -49,12 +95,13 @@ class Auth extends React.Component<{}, State> {
       this.setState({ validationErrors });
       return;
     }
-    // TODO: Graph.cool auth.
-    this.setState(initialState);
+
+    this.setState({ pending: true });
+    mutate(fields, this.handleCompleted, this.handleError);
   };
 
   render() {
-    const { validationErrors } = this.state;
+    const { pending, validationErrors } = this.state;
     return (
       <Box>
         <Heading size={1}>
@@ -64,7 +111,9 @@ class Auth extends React.Component<{}, State> {
           <Set vertical>
             <TextInput
               autoFocus={validationErrors.loginNumber}
+              disabled={pending}
               error={<ValidationError error={validationErrors.loginNumber} />}
+              placeholder="..."
               label={
                 <Text bold>
                   <FormattedMessage
@@ -77,9 +126,15 @@ class Auth extends React.Component<{}, State> {
               value={this.state.loginNumber}
               type="text"
             />
+            {/* {this.state.loginNumber.trim().length > 0 &&
+              !isNumeric(this.state.loginNumber) && (
+                <Text>Jen cisla od 0 do 1 prosim</Text>
+              )} */}
             <TextInput
               autoFocus={validationErrors.password}
+              disabled={pending}
               error={<ValidationError error={validationErrors.password} />}
+              placeholder="..."
               label={
                 <Text bold>
                   <FormattedMessage defaultMessage="Heslo" id="auth.password" />
@@ -91,7 +146,7 @@ class Auth extends React.Component<{}, State> {
             />
           </Set>
           <Set>
-            <SignInButton onPress={this.signIn} primary />
+            <SignInButton disabled={pending} onPress={this.signIn} primary />
           </Set>
         </Form>
       </Box>

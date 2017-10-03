@@ -1,20 +1,14 @@
 // @flow
-import AppError from './AppError';
-import Baseline from './Baseline';
 import Box from './Box';
 import Button from './Button';
-import Head from 'next/head';
-import LoadingBar from './LoadingBar';
 import MainNav from './MainNav';
 import React, { type Node } from 'react';
 import SwitchLocale from '../components/SwitchLocale';
 import Text from './Text';
-import type { State } from '../types';
 import { FormattedMessage } from 'react-intl';
-import { ThemeProvider } from 'react-fela';
-import { browserTheme, browserThemeDark } from '../themes/browserTheme';
-import { connect, type Connector, type MapStateToProps } from 'react-redux';
 import { deleteCookie } from '../lib/cookie';
+import BasePage from './BasePage';
+import { type PageTheme } from '../themes/types';
 
 const PageContainer = ({ children }) => (
   <Box
@@ -66,50 +60,20 @@ const PageFooter = () => (
   </Text>
 );
 
-// Because context is like dependency injection.
-// https://facebook.github.io/react/docs/context.html#updating-context
-const forceRenderOnThemeChange = theme => ({ key: JSON.stringify(theme) });
-
-const Page = ({ children, darkEnabled, title }) => {
-  const theme = darkEnabled ? browserThemeDark : browserTheme;
-  const pageBackgroundColor = theme.colors[theme.page.backgroundColor];
-  return (
-    <ThemeProvider theme={theme} {...forceRenderOnThemeChange(theme)}>
-      <Baseline>
-        <Head>
-          <title>{title}</title>
-          <meta name="theme-color" content={pageBackgroundColor} />
-          <style
-            dangerouslySetInnerHTML={{
-              __html: `html { background-color: ${pageBackgroundColor} }`,
-            }}
-          />
-        </Head>
-        <LoadingBar color={theme.colors.primary} />
-        <AppError />
-        <PageContainer>
-          <MainNav title={title} />
-          <PageBody>{children}</PageBody>
-          <PageFooter />
-        </PageContainer>
-      </Baseline>
-    </ThemeProvider>
-  );
-};
-
-type OwnProps = {|
+type PageProps = {|
   title: string,
   children?: Node,
+  pageTemplate?: PageTheme,
 |};
 
-type Props = {
-  darkEnabled: boolean,
-} & OwnProps;
+const Page = ({ children, title, pageTemplate }: PageProps) => (
+  <BasePage title={title} pageTemplate={pageTemplate}>
+    <PageContainer>
+      <MainNav title={title} />
+      <PageBody>{children}</PageBody>
+      <PageFooter />
+    </PageContainer>
+  </BasePage>
+);
 
-const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
-  darkEnabled: state.app.darkEnabled,
-});
-
-const connector: Connector<OwnProps, Props> = connect(mapStateToProps);
-
-export default connector(Page);
+export default Page;

@@ -43,6 +43,11 @@ export type Bold =
   | 800
   | 900;
 
+export type PageTheme = {|
+  backgroundColor: ColorName,
+  background: string,
+|};
+
 export type Theme = {
   typography: {|
     fontSize: number => number,
@@ -50,9 +55,7 @@ export type Theme = {
     rhythm: number => number,
   |},
   colors: Colors,
-  page: {|
-    backgroundColor: ColorName,
-  |},
+  page: PageTheme,
   text: {|
     bold: Bold,
     color: ColorName,

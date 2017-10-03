@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Theme } from './types';
+import type { Theme, PageTheme } from './types';
 import openColor from './openColor';
 import typography from './typography';
 
@@ -22,6 +22,7 @@ export const browserTheme: Theme = {
   },
   page: {
     backgroundColor: 'white',
+    background: 'transparent',
   },
   text: {
     bold: 600,
@@ -88,6 +89,11 @@ export const browserTheme: Theme = {
       </svg>
     ),
   },
+};
+
+export const loginPage: PageTheme = {
+  backgroundColor: 'white',
+  background: "#DCDCDC url('../static/img/login-bg.gif') 0 0 repeat-x",
 };
 
 export const browserThemeDark: Theme = {

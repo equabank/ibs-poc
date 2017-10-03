@@ -4,7 +4,7 @@ import type { State } from '../types';
 import type { Theme } from '../themes/types';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, type MapStateToProps } from 'react-redux';
 
 // Test vertical rhythm visually. Inspired by basehold.it
 
@@ -52,6 +52,8 @@ Baseline.contextTypes = {
   theme: PropTypes.object,
 };
 
-export default connect((state: State) => ({
+const mapStateToProps: MapStateToProps<*, *, *> = (state: State) => ({
   baselineShown: state.app.baselineShown,
-}))(Baseline);
+});
+
+export default connect(mapStateToProps)(Baseline);

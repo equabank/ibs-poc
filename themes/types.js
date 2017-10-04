@@ -8,7 +8,11 @@ export type ColorName =
   | 'danger'
   | 'black'
   | 'white'
-  | 'gray';
+  | 'gray'
+  | 'gray10'
+  | 'gray11'
+  | 'gray12'
+  | 'blue10';
 
 export type ColorProps = {
   primary?: boolean,
@@ -18,6 +22,10 @@ export type ColorProps = {
   black?: boolean,
   white?: boolean,
   gray?: boolean,
+  gray10?: boolean,
+  gray11?: boolean,
+  gray12?: boolean,
+  blue10?: boolean,
 };
 
 type Colors = {
@@ -28,6 +36,10 @@ type Colors = {
   black: string,
   white: string,
   gray: string,
+  gray10: string,
+  gray11: string,
+  gray12: string,
+  blue10: string,
 };
 
 export type Bold =

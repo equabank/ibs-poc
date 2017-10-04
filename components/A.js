@@ -12,7 +12,7 @@ type AProps = {
 const A = (props: AProps) => {
   const {
     as = 'a',
-    color = 'primary',
+    color = 'blue10',
     href,
     isActive,
     prefetch,
@@ -24,9 +24,9 @@ const A = (props: AProps) => {
       <Text
         as={as}
         color={color}
-        decoration={isActive ? 'underline' : 'none'}
+        decoration={isActive ? 'none' : 'underline'}
         style={{
-          ':hover': { textDecoration: 'underline' },
+          ':hover': { textDecoration: 'none' },
           ...style,
         }}
         {...restProps}

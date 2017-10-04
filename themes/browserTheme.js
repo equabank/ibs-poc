@@ -19,6 +19,10 @@ export const browserTheme: Theme = {
     black: openColor.gray8,
     white: openColor.white,
     gray: openColor.gray5,
+    gray10: openColor.gray10,
+    gray11: openColor.gray11,
+    gray12: openColor.gray12,
+    blue10: openColor.blue10,
   },
   page: {
     backgroundColor: 'white',
@@ -93,7 +97,7 @@ export const browserTheme: Theme = {
 
 export const loginPage: PageTheme = {
   backgroundColor: 'white',
-  background: "#DCDCDC url('../static/img/login-bg.gif') 0 0 repeat-x",
+  background: "white url('../static/img/login-bg.gif') 0 0 repeat-x",
 };
 
 export const browserThemeDark: Theme = {
@@ -106,6 +110,10 @@ export const browserThemeDark: Theme = {
     black: openColor.gray8,
     white: openColor.white,
     gray: openColor.gray6,
+    gray10: openColor.gray10,
+    gray11: openColor.gray11,
+    gray12: openColor.gray12,
+    blue10: openColor.blue10,
   },
   page: {
     ...browserTheme.page,

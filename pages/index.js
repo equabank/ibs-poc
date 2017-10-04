@@ -4,6 +4,7 @@ import app from '../components/app';
 import BasePage from '../components/BasePage';
 import LoginPageFooter from '../components/LoginPageFooter';
 import Box from '../components/Box';
+import LoginHeader from '../components/LoginHeader';
 import Auth from '../components/Auth';
 import sitemap from '../lib/sitemap';
 import { loginPage } from '../themes/browserTheme';
@@ -15,8 +16,10 @@ const Index = ({ intl }) => (
   >
     <PageContent>
       <Container flex={1}>
+        <LoginHeader intl={intl} />
+        <Box height="100px" />
         <Auth />
-        <Box height="500px" />
+        <Box height="300px" />
       </Container>
       <LoginPageFooter />
     </PageContent>

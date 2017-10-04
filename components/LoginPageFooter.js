@@ -221,7 +221,10 @@ const FooterBranchColumn = () => (
         lineHeight: '19.5',
       }}
     >
-      <A href="Kanceláře firemního bankovnictví" target="_blank">
+      <A
+        href="http://equabank.cz/firemni/kontakt/adresy-pobocek/"
+        target="_blank"
+      >
         <FormattedMessage
           defaultMessage="Kanceláře firemního bankovnictví"
           id="footer.smeBranches"

@@ -33,5 +33,22 @@
   "validationError.requiredAgree": "Prosím, zapřemýšlejte o tom.",
   "validationError.wrongPassword": "Nesprávné heslo",
   "viewerWebs.noWebCreatedYet": "Nemáte žádný web. Vytvořte si nějaký.",
-  "yourWebs": "Your Webs"
+  "yourWebs": "Your Webs",
+  "loginHeader.backToEqua": "Zpět na ůvodní stránku",
+  "footer.needAdvice": "Potřebujete poradit?",
+  "footer.needAdvice.openTime": "Volejte denně kdykoliv od 8.00 do 20.00 hod. ",
+  "footer.needAdvice.phone": "+420 222 010 222",
+  "footer.needAdvice.writeTo": " nebo pište na ",
+  "footer.needAdvice.kcEmail": "klientske.centrum@equabank.cz",
+  "footer.needAdvice.documents": "Dokumenty ke stažení",
+  "footer.needAdvice.faq": "Časté dotazy",
+  "footer.needAdvice.contacts": "Další kontakty",
+  "footer.needAdvice.conditions": "Podmínky používání",
+  "footer.needAdvice.copyright":
+    "© Equa bank a.s. 2011 - 2017. Všechna práva vyhrazena.",
+  "footer.branches": "Seznam poboček",
+  "footer.smeBranches": "Kanceláře firemního bankovnictví",
+  "footer.areYouClient": "Jste klientem Equa bank?",
+  "footer.folowUs": "Sledujte nás:",
+  "footer.moreThanExpected": "Více, než čekáte"
 }

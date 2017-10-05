@@ -1,0 +1,17 @@
+mutation {
+  signinUser(
+    input: {
+      clientMutationId: "asdfasdf"
+      email: {
+        email: "12345678"
+        password: "a"
+      }
+    }
+  ){
+    token, 
+    user{
+      id, 
+      email
+    }
+  }
+}

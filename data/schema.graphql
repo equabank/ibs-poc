@@ -1,5 +1,14 @@
-# source: https://api.graph.cool/relay/v1/cj7u9vxq11i0r0111j2xcpv33
-# timestamp: Fri Sep 22 2017 14:57:02 GMT+0200 (CEST)
+# source: https://api.graph.cool/relay/v1/cj7w1nh7n02c20147sn4t37fu
+# timestamp: Thu Oct 05 2017 13:21:31 GMT+0200 (Střední Evropa (letní čas))
+
+input AUTH_PROVIDER_EMAIL {
+  email: String!
+  password: String!
+}
+
+input AuthProviderSignupData {
+  email: AUTH_PROVIDER_EMAIL
+}
 
 input CreateFile {
   name: String!
@@ -424,6 +433,7 @@ type Mutation {
   deleteFile(input: DeleteFileInput!): DeleteFilePayload
   deletePaymentOrder(input: DeletePaymentOrderInput!): DeletePaymentOrderPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  signinUser(input: SigninUserInput!): SigninPayload!
   createUser(input: SignupUserInput!): CreateUserPayload!
 }
 
@@ -715,8 +725,22 @@ type Query {
   ): Node
 }
 
+# If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
+type SigninPayload {
+  token: String
+  user: User
+  clientMutationId: String
+  viewer: Viewer!
+}
+
+input SigninUserInput {
+  email: AUTH_PROVIDER_EMAIL
+  clientMutationId: String!
+}
+
 input SignupUserInput {
   clientMutationId: String!
+  authProvider: AuthProviderSignupData!
 }
 
 input UpdateFile {
@@ -817,7 +841,9 @@ type UpdateUserPayload {
 
 type User implements Node {
   createdAt: DateTime!
+  email: String
   id: ID!
+  password: String
   updatedAt: DateTime!
 }
 
@@ -870,6 +896,46 @@ input UserFilter {
 
   # All values greater than or equal the given value.
   createdAt_gte: DateTime
+  email: String
+
+  # All values that are not equal to given value.
+  email_not: String
+
+  # All values that are contained in given list.
+  email_in: [String!]
+
+  # All values that are not contained in given list.
+  email_not_in: [String!]
+
+  # All values less than the given value.
+  email_lt: String
+
+  # All values less than or equal the given value.
+  email_lte: String
+
+  # All values greater than the given value.
+  email_gt: String
+
+  # All values greater than or equal the given value.
+  email_gte: String
+
+  # All values containing the given string.
+  email_contains: String
+
+  # All values not containing the given string.
+  email_not_contains: String
+
+  # All values starting with the given string.
+  email_starts_with: String
+
+  # All values not starting with the given string.
+  email_not_starts_with: String
+
+  # All values ending with the given string.
+  email_ends_with: String
+
+  # All values not ending with the given string.
+  email_not_ends_with: String
   id: ID
 
   # All values that are not equal to given value.
@@ -910,6 +976,46 @@ input UserFilter {
 
   # All values not ending with the given string.
   id_not_ends_with: ID
+  password: String
+
+  # All values that are not equal to given value.
+  password_not: String
+
+  # All values that are contained in given list.
+  password_in: [String!]
+
+  # All values that are not contained in given list.
+  password_not_in: [String!]
+
+  # All values less than the given value.
+  password_lt: String
+
+  # All values less than or equal the given value.
+  password_lte: String
+
+  # All values greater than the given value.
+  password_gt: String
+
+  # All values greater than or equal the given value.
+  password_gte: String
+
+  # All values containing the given string.
+  password_contains: String
+
+  # All values not containing the given string.
+  password_not_contains: String
+
+  # All values starting with the given string.
+  password_starts_with: String
+
+  # All values not starting with the given string.
+  password_not_starts_with: String
+
+  # All values ending with the given string.
+  password_ends_with: String
+
+  # All values not ending with the given string.
+  password_not_ends_with: String
   updatedAt: DateTime
 
   # All values that are not equal to given value.
@@ -937,8 +1043,12 @@ input UserFilter {
 enum UserOrderBy {
   createdAt_ASC
   createdAt_DESC
+  email_ASC
+  email_DESC
   id_ASC
   id_DESC
+  password_ASC
+  password_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
@@ -951,6 +1061,6 @@ type Viewer {
   user: User
   File(id: ID, secret: String, url: String): File
   PaymentOrder(id: ID): PaymentOrder
-  User(id: ID): User
+  User(email: String, id: ID): User
   id: ID!
 }

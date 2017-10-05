@@ -1,0 +1,16 @@
+mutation {
+  createUser(input: 
+    {	clientMutationId: "", 
+      authProvider: {
+        email: {
+          email: "12345678", 
+          password: "a"
+        }
+      }
+    }
+  ) {
+    user {
+      id
+    }
+  }
+}

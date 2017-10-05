@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { type ComponentType } from 'react';
 import Box from './Box';
 import Heading from './Heading';
 import Form from './Form';
@@ -13,7 +13,14 @@ import * as validation from '../lib/validation';
 import { setCookie } from '../lib/cookie';
 import Router from 'next/router';
 import sitemap from '../lib/sitemap';
+import withMutation, { getClientMutationId } from './withMutation';
+import SigninMutation from '../mutations/SigninMutation';
+import { type SigninMutationResponse } from '../mutations/__generated__/SigninMutation.graphql';
 // import isNumeric from 'validator/lib/isNumeric';
+type OwnProps = {};
+type Props = {
+  mutate: *,
+} & OwnProps;
 
 type Fields = {
   loginNumber: string,
@@ -39,29 +46,24 @@ type ServerLoginErrorResponse = {|
   |},
 |};
 
-const users = {
-  '12345678': 'adminadmin',
-  '87654321': 'nimdanimda',
-};
-
-const mutate = (fields, onCompleted, onError) => {
-  setTimeout(() => {
-    const userExists = users[fields.loginNumber] === fields.password;
-    if (!userExists) {
-      onError({ weird: { code: 123 } });
-      return;
-    }
-    onCompleted();
-  }, 2000);
-};
-
-class Auth extends React.Component<{}, State> {
+class Auth extends React.Component<Props, State> {
   state = initialState;
 
-  handleCompleted = () => {
-    this.setState(initialState);
-    setCookie({ token: '123', userId: '123' });
-    Router.replace(sitemap.payments.path);
+  handleCompleted = (response: SigninMutationResponse) => {
+    const token =
+      response && response.signinUser ? response.signinUser.token : null;
+    const userId =
+      response && response.signinUser && response.signinUser.user
+        ? response.signinUser.user.id
+        : null;
+
+    if (token && userId) {
+      this.setState(initialState);
+      setCookie({ token, userId });
+      Router.replace(sitemap.payments.path);
+    } else {
+      this.setState({ pending: false });
+    }
   };
 
   handleError = (error: ServerLoginErrorResponse) => {
@@ -86,8 +88,6 @@ class Auth extends React.Component<{}, State> {
     const validate = fields => {
       const loginNumber = validation.loginNumber(fields.loginNumber);
       if (loginNumber) return { loginNumber };
-      const password = validation.password(fields.password);
-      if (password) return { password };
     };
 
     const validationErrors = validate(fields);
@@ -96,9 +96,33 @@ class Auth extends React.Component<{}, State> {
       return;
     }
 
+    const signinInput = {
+      email: {
+        email: fields.loginNumber,
+        password: fields.password,
+      },
+      clientMutationId: getClientMutationId(),
+    };
+
     this.setState({ pending: true });
-    mutate(fields, this.handleCompleted, this.handleError);
+    this.props.mutate(
+      SigninMutation.commit,
+      { signinInput },
+      this.handleCompleted,
+      this.handleError,
+    );
   };
+  //
+  // mutate(fields, onCompleted, onError) {
+  //   setTimeout(() => {
+  //     const userExists = users[fields.loginNumber] === fields.password;
+  //     if (!userExists) {
+  //       onError({ weird: { code: 123 } });
+  //       return;
+  //     }
+  //     onCompleted();
+  //   }, 2000);
+  // }
 
   render() {
     const { pending, validationErrors } = this.state;
@@ -153,5 +177,6 @@ class Auth extends React.Component<{}, State> {
     );
   }
 }
+const AuthWithMutation: ComponentType<OwnProps> = withMutation(Auth);
 
-export default Auth;
+export default AuthWithMutation;

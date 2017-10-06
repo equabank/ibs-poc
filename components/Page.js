@@ -15,8 +15,8 @@ const PageContainer = ({ children }) => (
     margin="auto"
     paddingHorizontal={1}
     style={{
-      maxWidth: 960,
-      minHeight: '100vh', // make footer sticky
+      maxWidth: 972,
+      minHeight: '100vh' // make footer sticky
     }}
   >
     {children}
@@ -63,7 +63,7 @@ const PageFooter = () => (
 type PageProps = {|
   title: string,
   children?: Node,
-  pageTemplate?: PageTheme,
+  pageTemplate?: PageTheme
 |};
 
 const Page = ({ children, title, pageTemplate }: PageProps) => (

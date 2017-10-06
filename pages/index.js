@@ -34,7 +34,7 @@ const Container = ({ children }) => (
 const PageContent = ({ children }) => (
   <Box
     style={{
-      minHeight: '100vh', // make footer sticky
+      minHeight: '100vh' // make footer sticky
     }}
   >
     {children}

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2e917acdb0b65feaaa3e2bfa033e7638
+ * @relayHash 42eb2ed14a409f0499f27c4afbae33d5
  */
 
 /* eslint-disable */
@@ -40,6 +40,12 @@ fragment PaymentOrdersItem_payment on PaymentOrder {
   createdAt
   recipientAccount
   payeeAccount
+  type
+  account {
+    currency
+    id
+    type
+  }
 }
 */
 
@@ -173,6 +179,45 @@ const batch /*: ConcreteBatch*/ = {
                                 "args": null,
                                 "name": "payeeAccount",
                                 "storageKey": null
+                              },
+                              {
+                                "kind": "ScalarField",
+                                "alias": null,
+                                "args": null,
+                                "name": "type",
+                                "storageKey": null
+                              },
+                              {
+                                "kind": "LinkedField",
+                                "alias": null,
+                                "args": null,
+                                "concreteType": "Account",
+                                "name": "account",
+                                "plural": false,
+                                "selections": [
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "currency",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "id",
+                                    "storageKey": null
+                                  },
+                                  {
+                                    "kind": "ScalarField",
+                                    "alias": null,
+                                    "args": null,
+                                    "name": "type",
+                                    "storageKey": null
+                                  }
+                                ],
+                                "storageKey": null
                               }
                             ]
                           }
@@ -192,7 +237,7 @@ const batch /*: ConcreteBatch*/ = {
       }
     ]
   },
-  "text": "query paymentsQuery {\n  viewer {\n    ...PaymentOrders_viewer\n    id\n  }\n}\n\nfragment PaymentOrders_viewer on Viewer {\n  allPaymentOrders(orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...PaymentOrdersItem_payment\n      }\n    }\n  }\n}\n\nfragment PaymentOrdersItem_payment on PaymentOrder {\n  id\n  amount\n  createdAt\n  recipientAccount\n  payeeAccount\n}\n"
+  "text": "query paymentsQuery {\n  viewer {\n    ...PaymentOrders_viewer\n    id\n  }\n}\n\nfragment PaymentOrders_viewer on Viewer {\n  allPaymentOrders(orderBy: createdAt_ASC, first: 100) {\n    edges {\n      node {\n        id\n        ...PaymentOrdersItem_payment\n      }\n    }\n  }\n}\n\nfragment PaymentOrdersItem_payment on PaymentOrder {\n  id\n  amount\n  createdAt\n  recipientAccount\n  payeeAccount\n  type\n  account {\n    currency\n    id\n    type\n  }\n}\n"
 };
 
 module.exports = batch;

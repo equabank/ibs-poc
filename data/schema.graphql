@@ -1,5 +1,234 @@
 # source: https://api.graph.cool/relay/v1/cj7w1nh7n02c20147sn4t37fu
-# timestamp: Thu Oct 05 2017 13:21:31 GMT+0200 (Střední Evropa (letní čas))
+# timestamp: Fri Oct 06 2017 15:31:30 GMT+0200 (Central Europe Daylight Time)
+
+type Account implements Node {
+  amount: Float!
+  blocked: Float!
+  currency: Currency!
+  id: ID!
+  name: String!
+  paymentOrders(filter: PaymentOrderFilter, orderBy: PaymentOrderOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PaymentOrderConnection
+  type: AccountType!
+}
+
+# A connection to a list of items.
+type AccountConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AccountEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+# An edge in a connection.
+type AccountEdge {
+  # The item at the end of the edge.
+  node: Account!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input AccountFilter {
+  # Logical AND on all given filters.
+  AND: [AccountFilter!]
+
+  # Logical OR on all given filters.
+  OR: [AccountFilter!]
+  amount: Float
+
+  # All values that are not equal to given value.
+  amount_not: Float
+
+  # All values that are contained in given list.
+  amount_in: [Float!]
+
+  # All values that are not contained in given list.
+  amount_not_in: [Float!]
+
+  # All values less than the given value.
+  amount_lt: Float
+
+  # All values less than or equal the given value.
+  amount_lte: Float
+
+  # All values greater than the given value.
+  amount_gt: Float
+
+  # All values greater than or equal the given value.
+  amount_gte: Float
+  blocked: Float
+
+  # All values that are not equal to given value.
+  blocked_not: Float
+
+  # All values that are contained in given list.
+  blocked_in: [Float!]
+
+  # All values that are not contained in given list.
+  blocked_not_in: [Float!]
+
+  # All values less than the given value.
+  blocked_lt: Float
+
+  # All values less than or equal the given value.
+  blocked_lte: Float
+
+  # All values greater than the given value.
+  blocked_gt: Float
+
+  # All values greater than or equal the given value.
+  blocked_gte: Float
+  currency: Currency
+
+  # All values that are not equal to given value.
+  currency_not: Currency
+
+  # All values that are contained in given list.
+  currency_in: [Currency!]
+
+  # All values that are not contained in given list.
+  currency_not_in: [Currency!]
+  id: ID
+
+  # All values that are not equal to given value.
+  id_not: ID
+
+  # All values that are contained in given list.
+  id_in: [ID!]
+
+  # All values that are not contained in given list.
+  id_not_in: [ID!]
+
+  # All values less than the given value.
+  id_lt: ID
+
+  # All values less than or equal the given value.
+  id_lte: ID
+
+  # All values greater than the given value.
+  id_gt: ID
+
+  # All values greater than or equal the given value.
+  id_gte: ID
+
+  # All values containing the given string.
+  id_contains: ID
+
+  # All values not containing the given string.
+  id_not_contains: ID
+
+  # All values starting with the given string.
+  id_starts_with: ID
+
+  # All values not starting with the given string.
+  id_not_starts_with: ID
+
+  # All values ending with the given string.
+  id_ends_with: ID
+
+  # All values not ending with the given string.
+  id_not_ends_with: ID
+  name: String
+
+  # All values that are not equal to given value.
+  name_not: String
+
+  # All values that are contained in given list.
+  name_in: [String!]
+
+  # All values that are not contained in given list.
+  name_not_in: [String!]
+
+  # All values less than the given value.
+  name_lt: String
+
+  # All values less than or equal the given value.
+  name_lte: String
+
+  # All values greater than the given value.
+  name_gt: String
+
+  # All values greater than or equal the given value.
+  name_gte: String
+
+  # All values containing the given string.
+  name_contains: String
+
+  # All values not containing the given string.
+  name_not_contains: String
+
+  # All values starting with the given string.
+  name_starts_with: String
+
+  # All values not starting with the given string.
+  name_not_starts_with: String
+
+  # All values ending with the given string.
+  name_ends_with: String
+
+  # All values not ending with the given string.
+  name_not_ends_with: String
+  type: AccountType
+
+  # All values that are not equal to given value.
+  type_not: AccountType
+
+  # All values that are contained in given list.
+  type_in: [AccountType!]
+
+  # All values that are not contained in given list.
+  type_not_in: [AccountType!]
+  paymentOrders_every: PaymentOrderFilter
+  paymentOrders_some: PaymentOrderFilter
+  paymentOrders_none: PaymentOrderFilter
+}
+
+enum AccountOrderBy {
+  amount_ASC
+  amount_DESC
+  blocked_ASC
+  blocked_DESC
+  currency_ASC
+  currency_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  type_ASC
+  type_DESC
+}
+
+input AccountpaymentOrdersPaymentOrder {
+  amount: Float!
+  payeeAccount: String!
+  recipientAccount: String!
+  type: String!
+  variableSymbol: String!
+}
+
+enum AccountType {
+  Current
+  Saving
+}
+
+type AddToPaymentOrderOnAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  paymentOrdersPaymentOrder: PaymentOrder
+  accountAccount: Account
+  paymentOrdersPaymentOrderEdge: PaymentOrderEdge
+  accountAccountEdge: AccountEdge
+}
+
+input AddToPaymentOrderOnAccountPaymentOrderInput {
+  accountAccountId: ID!
+  paymentOrdersPaymentOrderId: ID!
+  clientMutationId: String!
+}
 
 input AUTH_PROVIDER_EMAIL {
   email: String!
@@ -8,6 +237,34 @@ input AUTH_PROVIDER_EMAIL {
 
 input AuthProviderSignupData {
   email: AUTH_PROVIDER_EMAIL
+}
+
+input CreateAccount {
+  amount: Float!
+  blocked: Float!
+  currency: Currency!
+  name: String!
+  type: AccountType!
+  paymentOrdersIds: [ID!]
+  paymentOrders: [AccountpaymentOrdersPaymentOrder!]
+}
+
+input CreateAccountInput {
+  amount: Float!
+  blocked: Float!
+  currency: Currency!
+  name: String!
+  type: AccountType!
+  paymentOrdersIds: [ID!]
+  paymentOrders: [AccountpaymentOrdersPaymentOrder!]
+  clientMutationId: String!
+}
+
+type CreateAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  account: Account
+  edge: AccountEdge
 }
 
 input CreateFile {
@@ -30,14 +287,20 @@ input CreatePaymentOrder {
   amount: Float!
   payeeAccount: String!
   recipientAccount: String!
+  type: String!
   variableSymbol: String!
+  accountId: ID
+  account: PaymentOrderaccountAccount
 }
 
 input CreatePaymentOrderInput {
   amount: Float!
   payeeAccount: String!
   recipientAccount: String!
+  type: String!
   variableSymbol: String!
+  accountId: ID
+  account: PaymentOrderaccountAccount
   clientMutationId: String!
 }
 
@@ -46,6 +309,7 @@ type CreatePaymentOrderPayload {
   clientMutationId: String!
   paymentOrder: PaymentOrder
   edge: PaymentOrderEdge
+  account: Account
 }
 
 # If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
@@ -55,7 +319,26 @@ type CreateUserPayload {
   viewer: Viewer!
 }
 
+enum Currency {
+  CZK
+  EUR
+  USD
+}
+
 scalar DateTime
+
+input DeleteAccountInput {
+  id: ID!
+  clientMutationId: String!
+}
+
+type DeleteAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  account: Account
+  edge: AccountEdge
+  deletedId: ID
+}
 
 input DeleteFileInput {
   id: ID!
@@ -80,6 +363,7 @@ type DeletePaymentOrderPayload {
   clientMutationId: String!
   paymentOrder: PaymentOrder
   edge: PaymentOrderEdge
+  account: Account
   deletedId: ID
 }
 
@@ -422,17 +706,23 @@ enum FileOrderBy {
 }
 
 type Mutation {
+  createAccount(input: CreateAccountInput!): CreateAccountPayload
   createFile(input: CreateFileInput!): CreateFilePayload
   createPaymentOrder(input: CreatePaymentOrderInput!): CreatePaymentOrderPayload
+  updateAccount(input: UpdateAccountInput!): UpdateAccountPayload
   updateFile(input: UpdateFileInput!): UpdateFilePayload
   updatePaymentOrder(input: UpdatePaymentOrderInput!): UpdatePaymentOrderPayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
+  updateOrCreateAccount(input: UpdateOrCreateAccountInput!): UpdateOrCreateAccountPayload
   updateOrCreateFile(input: UpdateOrCreateFileInput!): UpdateOrCreateFilePayload
   updateOrCreatePaymentOrder(input: UpdateOrCreatePaymentOrderInput!): UpdateOrCreatePaymentOrderPayload
   updateOrCreateUser(input: UpdateOrCreateUserInput!): UpdateOrCreateUserPayload
+  deleteAccount(input: DeleteAccountInput!): DeleteAccountPayload
   deleteFile(input: DeleteFileInput!): DeleteFilePayload
   deletePaymentOrder(input: DeletePaymentOrderInput!): DeletePaymentOrderPayload
   deleteUser(input: DeleteUserInput!): DeleteUserPayload
+  addToPaymentOrderOnAccount(input: AddToPaymentOrderOnAccountPaymentOrderInput!): AddToPaymentOrderOnAccountPayload
+  removeFromPaymentOrderOnAccount(input: RemoveFromPaymentOrderOnAccountPaymentOrderInput!): RemoveFromPaymentOrderOnAccountPayload
   signinUser(input: SigninUserInput!): SigninPayload!
   createUser(input: SignupUserInput!): CreateUserPayload!
 }
@@ -459,12 +749,24 @@ type PageInfo {
 }
 
 type PaymentOrder implements Node {
+  account(filter: AccountFilter): Account
   amount: Float!
   createdAt: DateTime!
   id: ID!
   payeeAccount: String!
   recipientAccount: String!
+  type: String!
   variableSymbol: String!
+}
+
+input PaymentOrderaccountAccount {
+  amount: Float!
+  blocked: Float!
+  currency: Currency!
+  name: String!
+  type: AccountType!
+  paymentOrdersIds: [ID!]
+  paymentOrders: [AccountpaymentOrdersPaymentOrder!]
 }
 
 # A connection to a list of items.
@@ -658,6 +960,46 @@ input PaymentOrderFilter {
 
   # All values not ending with the given string.
   recipientAccount_not_ends_with: String
+  type: String
+
+  # All values that are not equal to given value.
+  type_not: String
+
+  # All values that are contained in given list.
+  type_in: [String!]
+
+  # All values that are not contained in given list.
+  type_not_in: [String!]
+
+  # All values less than the given value.
+  type_lt: String
+
+  # All values less than or equal the given value.
+  type_lte: String
+
+  # All values greater than the given value.
+  type_gt: String
+
+  # All values greater than or equal the given value.
+  type_gte: String
+
+  # All values containing the given string.
+  type_contains: String
+
+  # All values not containing the given string.
+  type_not_contains: String
+
+  # All values starting with the given string.
+  type_starts_with: String
+
+  # All values not starting with the given string.
+  type_not_starts_with: String
+
+  # All values ending with the given string.
+  type_ends_with: String
+
+  # All values not ending with the given string.
+  type_not_ends_with: String
   variableSymbol: String
 
   # All values that are not equal to given value.
@@ -698,6 +1040,7 @@ input PaymentOrderFilter {
 
   # All values not ending with the given string.
   variableSymbol_not_ends_with: String
+  account: AccountFilter
 }
 
 enum PaymentOrderOrderBy {
@@ -711,6 +1054,8 @@ enum PaymentOrderOrderBy {
   payeeAccount_DESC
   recipientAccount_ASC
   recipientAccount_DESC
+  type_ASC
+  type_DESC
   variableSymbol_ASC
   variableSymbol_DESC
 }
@@ -723,6 +1068,21 @@ type Query {
     # The ID of an object
     id: ID!
   ): Node
+}
+
+type RemoveFromPaymentOrderOnAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  paymentOrdersPaymentOrder: PaymentOrder
+  accountAccount: Account
+  paymentOrdersPaymentOrderEdge: PaymentOrderEdge
+  accountAccountEdge: AccountEdge
+}
+
+input RemoveFromPaymentOrderOnAccountPaymentOrderInput {
+  accountAccountId: ID!
+  paymentOrdersPaymentOrderId: ID!
+  clientMutationId: String!
 }
 
 # If authentication was successful the payload contains the user and a token. If unsuccessful this payload is null.
@@ -743,6 +1103,36 @@ input SignupUserInput {
   authProvider: AuthProviderSignupData!
 }
 
+input UpdateAccount {
+  amount: Float
+  blocked: Float
+  currency: Currency
+  id: ID!
+  name: String
+  type: AccountType
+  paymentOrdersIds: [ID!]
+  paymentOrders: [AccountpaymentOrdersPaymentOrder!]
+}
+
+input UpdateAccountInput {
+  amount: Float
+  blocked: Float
+  currency: Currency
+  id: ID!
+  name: String
+  type: AccountType
+  paymentOrdersIds: [ID!]
+  paymentOrders: [AccountpaymentOrdersPaymentOrder!]
+  clientMutationId: String!
+}
+
+type UpdateAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  account: Account
+  edge: AccountEdge
+}
+
 input UpdateFile {
   id: ID!
   name: String
@@ -759,6 +1149,19 @@ type UpdateFilePayload {
   clientMutationId: String!
   file: File
   edge: FileEdge
+}
+
+input UpdateOrCreateAccountInput {
+  update: UpdateAccount!
+  create: CreateAccount!
+  clientMutationId: String!
+}
+
+type UpdateOrCreateAccountPayload {
+  viewer: Viewer!
+  clientMutationId: String!
+  account: Account
+  edge: AccountEdge
 }
 
 input UpdateOrCreateFileInput {
@@ -785,6 +1188,7 @@ type UpdateOrCreatePaymentOrderPayload {
   clientMutationId: String!
   paymentOrder: PaymentOrder
   edge: PaymentOrderEdge
+  account: Account
 }
 
 input UpdateOrCreateUserInput {
@@ -804,7 +1208,10 @@ input UpdatePaymentOrder {
   id: ID!
   payeeAccount: String
   recipientAccount: String
+  type: String
   variableSymbol: String
+  accountId: ID
+  account: PaymentOrderaccountAccount
 }
 
 input UpdatePaymentOrderInput {
@@ -812,7 +1219,10 @@ input UpdatePaymentOrderInput {
   id: ID!
   payeeAccount: String
   recipientAccount: String
+  type: String
   variableSymbol: String
+  accountId: ID
+  account: PaymentOrderaccountAccount
   clientMutationId: String!
 }
 
@@ -821,6 +1231,7 @@ type UpdatePaymentOrderPayload {
   clientMutationId: String!
   paymentOrder: PaymentOrder
   edge: PaymentOrderEdge
+  account: Account
 }
 
 input UpdateUser {
@@ -1055,10 +1466,12 @@ enum UserOrderBy {
 
 # This is the famous Relay viewer object
 type Viewer {
+  allAccounts(filter: AccountFilter, orderBy: AccountOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): AccountConnection!
   allFiles(filter: FileFilter, orderBy: FileOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
   allPaymentOrders(filter: PaymentOrderFilter, orderBy: PaymentOrderOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): PaymentOrderConnection!
   allUsers(filter: UserFilter, orderBy: UserOrderBy, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   user: User
+  Account(id: ID): Account
   File(id: ID, secret: String, url: String): File
   PaymentOrder(id: ID): PaymentOrder
   User(email: String, id: ID): User

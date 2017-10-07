@@ -31,5 +31,11 @@
   "boxError.warning": "Warning",
   "boxError.error": "Error",
   "auth.errorMessage":
-    "Login number or password is incorrect. Forgot your password or login number? Contact our Customer Service at 222 010 222. We will be happy to assist you."
+    "Login number or password is incorrect. Forgot your password or login number? Contact our Customer Service at 222 010 222. We will be happy to assist you.",
+  "fraudWarning.heading": "Upozornění na podvodné emaily",
+  "fraudWarning.par1":
+    "Equa bank would <b>never send</b> you a direct link to your internet banking via email.",
+  "fraudWarning.par2":
+    "In case you receive such an e-mail, do not respond to it. It is best to delete it. Verify the secure connection by displaying a certificate.",
+  "fraudWarning.link": "Security quidelines"
 }

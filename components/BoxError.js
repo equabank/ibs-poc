@@ -1,21 +1,8 @@
 // @flow
-import React, { type ComponentType, type Element } from 'react';
+import React, { type Element } from 'react';
 import Box, { type BoxProps } from './Box';
-import AuthTabs from './AuthTabs';
-import Form from './Form';
-import ValidationError from './ValidationError';
 import Text from './Text';
-import Set from './Set';
-import TextInput from './TextInput';
 import { FormattedMessage } from 'react-intl';
-import { SignInButton } from './buttons';
-import * as validation from '../lib/validation';
-import { setCookie } from '../lib/cookie';
-import Router from 'next/router';
-import sitemap from '../lib/sitemap';
-import withMutation, { getClientMutationId } from './withMutation';
-import SigninMutation from '../mutations/SigninMutation';
-import { type SigninMutationResponse } from '../mutations/__generated__/SigninMutation.graphql';
 import { arialFont, ghoticFont } from '../themes/fonts';
 
 type BoxErrorType = 'warning' | 'error';
@@ -25,7 +12,18 @@ type BoxErrorProps = {
   type: BoxErrorType,
   rendered: boolean,
 } & BoxProps;
-//Upozornění
+
+const getBoxErrorType = (type: BoxErrorType) => {
+  switch (type) {
+    case 'warning':
+      return (
+        <FormattedMessage defaultMessage="Warning" id="boxError.warning" />
+      );
+    case 'error':
+      return <FormattedMessage defaultMessage="Error" id="boxError.error" />;
+  }
+};
+
 const BoxError = (props: BoxErrorProps) => {
   if (!props.rendered) return null;
   return (
@@ -60,17 +58,6 @@ const BoxError = (props: BoxErrorProps) => {
       </Text>
     </Box>
   );
-};
-
-const getBoxErrorType = (type: BoxErrorType) => {
-  switch (type) {
-    case 'warning':
-      return (
-        <FormattedMessage defaultMessage="Warning" id="boxError.warning" />
-      );
-    case 'error':
-      return <FormattedMessage defaultMessage="Error" id="boxError.error" />;
-  }
 };
 
 export default BoxError;

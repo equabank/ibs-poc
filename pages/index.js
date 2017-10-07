@@ -7,6 +7,7 @@ import Box from '../components/Box';
 import A from '../components/A';
 import LoginHeader from '../components/LoginHeader';
 import Auth from '../components/Auth';
+import FraudWarning from '../components/FraudWarning';
 import Text from '../components/Text';
 import Image from '../components/Image';
 import { ghoticFont } from '../themes/fonts';
@@ -40,6 +41,7 @@ const Index = ({ intl }) => (
             </Text>
             <Box marginTop="30px" paddingLeft="10px">
               <Auth />
+              <FraudWarning />
             </Box>
           </Box>
           <AdcertBox />

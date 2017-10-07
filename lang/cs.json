@@ -60,5 +60,11 @@
   "boxError.warning": "Upozornění",
   "boxError.error": "Chyba",
   "auth.errorMessage":
-    "Zadali jste nesprávné přihlašovací údaje. Zapomněli jste své heslo nebo přihlašovací číslo? Kontaktujte naše Klientské centrum na tel. 222 010 222, kde Vám s přihlášením rádi pomůžeme."
+    "Zadali jste nesprávné přihlašovací údaje. Zapomněli jste své heslo nebo přihlašovací číslo? Kontaktujte naše Klientské centrum na tel. 222 010 222, kde Vám s přihlášením rádi pomůžeme.",
+  "fraudWarning.heading": "Upozornění na podvodné emaily",
+  "fraudWarning.par1":
+    "Společnost Equa bank <b>nikdy neposílá</b> odkaz do internetového bankovnictví prostřednictvím e-mailu.",
+  "fraudWarning.par2":
+    "V případě obdržení takového e-mailu vás žádáme, abyste na něj nereagovali, případně jej smazali. Zabezpečené připojení je možné si ověřit zobrazením certifikátu.",
+  "fraudWarning.link": "Bezpečnostní zásady"
 }

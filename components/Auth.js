@@ -1,23 +1,21 @@
 // @flow
-import React, { type ComponentType, type Element } from 'react';
+import React, { type ComponentType } from 'react';
 import Box from './Box';
 import AuthTabs from './AuthTabs';
 import Form from './Form';
-import ValidationError from './ValidationError';
 import Text from './Text';
 import BoxError from './BoxError';
 import Set from './Set';
 import TextInput from './TextInput';
 import { FormattedMessage } from 'react-intl';
 import { SignInButton } from './buttons';
-import * as validation from '../lib/validation';
 import { setCookie } from '../lib/cookie';
 import Router from 'next/router';
 import sitemap from '../lib/sitemap';
 import withMutation, { getClientMutationId } from './withMutation';
 import SigninMutation from '../mutations/SigninMutation';
 import { type SigninMutationResponse } from '../mutations/__generated__/SigninMutation.graphql';
-import { arialFont, ghoticFont } from '../themes/fonts';
+import { arialFont } from '../themes/fonts';
 // import isNumeric from 'validator/lib/isNumeric';
 type OwnProps = {};
 type Props = {
@@ -41,13 +39,6 @@ const initialState = {
   error: false,
 };
 
-// Mocked mutate
-type ServerLoginErrorResponse = {|
-  weird: {|
-    code: 123,
-  |},
-|};
-
 class Auth extends React.Component<Props, State> {
   state = initialState;
 
@@ -68,7 +59,7 @@ class Auth extends React.Component<Props, State> {
     }
   };
 
-  handleError = (error: ServerLoginErrorResponse) => {
+  handleError = () => {
     this.setState({ pending: false, error: true });
   };
 
@@ -121,6 +112,7 @@ class Auth extends React.Component<Props, State> {
             borderTopRightRadius: '20px',
             boxShadow: '0 0 7px rgba(0, 0, 0, 0.15)',
             width: '375px',
+            marginBottom: '20px',
           }}
         >
           <Set marginBottom="8px">

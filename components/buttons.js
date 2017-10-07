@@ -2,6 +2,7 @@
 import React from 'react';
 import Button, { type ButtonProps } from './Button';
 import { FormattedMessage } from 'react-intl';
+import { ghoticFont } from '../themes/fonts';
 
 export const AddButton = (props: ButtonProps) => (
   <Button {...props}>
@@ -49,7 +50,22 @@ export const FacebookSignInButton = (props: ButtonProps) => (
 );
 
 export const SignInButton = (props: ButtonProps) => (
-  <Button {...props}>
+  <Button
+    {...props}
+    style={{
+      marginLeft: 'auto',
+      color: 'black',
+      fontSize: '14px',
+      fontFamily: ghoticFont,
+      fontWeight: 'normal',
+      backgroundImage:
+        "url('../static/img/login-button-blue-left.png'),url('../static/img/button-blue-right-arrow.png')",
+      backgroundPosition: 'left, right',
+      backgroundRepeat: 'no-repeat',
+      paddingRight: '30px',
+      ...props.style,
+    }}
+  >
     <FormattedMessage defaultMessage="Sign In" id="button.signIn" />
   </Button>
 );

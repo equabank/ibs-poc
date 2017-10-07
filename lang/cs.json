@@ -10,7 +10,7 @@
   "button.edit": "Editovat",
   "button.facebookSignIn": "Přihlásit se pomocí Facebooku",
   "button.save": "Uložit",
-  "button.signIn": "Přihlášení",
+  "button.signIn": "Přihlásit",
   "button.signOut": "Odhlásit se",
   "button.signUp": "Vytvořit účet",
   "button.submit": "Odeslat",
@@ -36,6 +36,7 @@
   "viewerWebs.noWebCreatedYet": "Nemáte žádný web. Vytvořte si nějaký.",
   "yourWebs": "Your Webs",
   "loginHeader.backToEqua": "Zpět na ůvodní stránku",
+  "loginPage.headline": "Vstup do internetového bankovnictví",
   "footer.needAdvice": "Potřebujete poradit?",
   "footer.needAdvice.openTime": "Volejte denně kdykoliv od 8.00 do 20.00 hod. ",
   "footer.needAdvice.phone": "+420 222 010 222",
@@ -51,5 +52,9 @@
   "footer.smeBranches": "Kanceláře firemního bankovnictví",
   "footer.areYouClient": "Jste klientem Equa bank?",
   "footer.folowUs": "Sledujte nás:",
-  "footer.moreThanExpected": "Více, než čekáte"
+  "footer.moreThanExpected": "Více, než čekáte",
+  "auth.heading": "Osobní",
+  "auth.sme": "Firemní",
+  "auth.loginNumber": "Přihlašovací číslo",
+  "auth.password": "Heslo"
 }

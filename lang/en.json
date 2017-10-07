@@ -4,9 +4,10 @@
   "footer.madeBy": "made by",
   "sitemap.title.index": "Home",
   "sitemap.title.me": "Me",
-  "sitemap.title.signIn": "Sign In",
+  "sitemap.title.signIn": "Login",
   "loginHeader.backToEqua": "Back to homepage",
   "mainNavHeader.backToEqua": "Back to homepage",
+  "loginPage.headline": "Login to Internet banking",
   "footer.needAdvice": "Do you need some help?",
   "footer.needAdvice.openTime": "Call daily from 8am to 8pm ",
   "footer.needAdvice.phone": "+420 222 010 222",
@@ -22,5 +23,9 @@
   "footer.smeBranches": "Corporate banking offices",
   "footer.areYouClient": "Are you a client of Equa bank?",
   "footer.folowUs": "Watch us:",
-  "footer.moreThanExpected": "Equa bank More than you expect"
+  "footer.moreThanExpected": "Equa bank More than you expect",
+  "auth.heading": "Personal",
+  "auth.sme": "Business",
+  "auth.loginNumber": "Login number",
+  "auth.password": "Password"
 }

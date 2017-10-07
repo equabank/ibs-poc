@@ -1,7 +1,7 @@
 // @flow
 import React, { type ComponentType } from 'react';
 import Box from './Box';
-import Heading from './Heading';
+import AuthTabs from './AuthTabs';
 import Form from './Form';
 import ValidationError from './ValidationError';
 import Text from './Text';
@@ -16,6 +16,7 @@ import sitemap from '../lib/sitemap';
 import withMutation, { getClientMutationId } from './withMutation';
 import SigninMutation from '../mutations/SigninMutation';
 import { type SigninMutationResponse } from '../mutations/__generated__/SigninMutation.graphql';
+import { arialFont } from '../themes/fonts';
 // import isNumeric from 'validator/lib/isNumeric';
 type OwnProps = {};
 type Props = {
@@ -128,20 +129,43 @@ class Auth extends React.Component<Props, State> {
     const { pending, validationErrors } = this.state;
     return (
       <Box>
-        <Heading size={1}>
-          <FormattedMessage defaultMessage="Osobní" id="auth.heading" />
-        </Heading>
-        <Form onSubmit={this.signIn}>
-          <Set vertical>
+        <AuthTabs />
+        <Form
+          onSubmit={this.signIn}
+          paddingTop="25px"
+          paddingLeft="25px"
+          style={{
+            border: '1px solid #e8e8e8',
+            borderBottomLeftRadius: '20px',
+            borderBottomRightRadius: '20px',
+            borderTopRightRadius: '20px',
+            boxShadow: '0 0 7px rgba(0, 0, 0, 0.15)',
+            width: '375px',
+          }}
+        >
+          <Set marginBottom="8px">
             <TextInput
               autoFocus={validationErrors.loginNumber}
               disabled={pending}
               error={<ValidationError error={validationErrors.loginNumber} />}
-              placeholder="..."
+              style={{
+                ':focus': { boxShadow: '#06f 0 0 7px' },
+                fontSize: '12px',
+                fontFamily: arialFont,
+                marginRight: '10px',
+                height: '22px',
+                paddingLeft: '4px',
+                paddingRight: '4px',
+                width: '150px',
+                borderTop: '1px solid rgb(132, 132, 132)',
+                borderRight: '1px solid rgb(193, 193, 193)',
+                borderBottom: '1px solid rgb(225, 225, 225)',
+                borderLeft: '1px solid rgb(193, 193, 193);',
+              }}
               label={
-                <Text bold>
+                <Text fontFamily={arialFont} style={{ fontSize: '12px' }}>
                   <FormattedMessage
-                    defaultMessage="Prihlasovaci cislo"
+                    defaultMessage="Přihlašovací číslo"
                     id="auth.loginNumber"
                   />
                 </Text>
@@ -158,19 +182,31 @@ class Auth extends React.Component<Props, State> {
               autoFocus={validationErrors.password}
               disabled={pending}
               error={<ValidationError error={validationErrors.password} />}
-              placeholder="..."
+              style={{
+                ':focus': { boxShadow: '#06f 0 0 7px' },
+                fontSize: '12px',
+                fontFamily: arialFont,
+                height: '22px',
+                paddingLeft: '4px',
+                paddingRight: '4px',
+                width: '150px',
+                borderTop: '1px solid rgb(132, 132, 132)',
+                borderRight: '1px solid rgb(193, 193, 193)',
+                borderBottom: '1px solid rgb(225, 225, 225)',
+                borderLeft: '1px solid rgb(193, 193, 193);',
+              }}
               label={
-                <Text bold>
+                <Text fontFamily={arialFont} style={{ fontSize: '12px' }}>
                   <FormattedMessage defaultMessage="Heslo" id="auth.password" />
                 </Text>
               }
               onChange={password => this.setState({ password })}
               value={this.state.password}
-              type="email"
+              type="password"
             />
           </Set>
-          <Set>
-            <SignInButton disabled={pending} onPress={this.signIn} primary />
+          <Set marginBottom="20px" paddingRight="25px">
+            <SignInButton disabled={pending} onPress={this.signIn} />
           </Set>
         </Form>
       </Box>

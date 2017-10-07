@@ -27,5 +27,9 @@
   "auth.heading": "Personal",
   "auth.sme": "Business",
   "auth.loginNumber": "Login number",
-  "auth.password": "Password"
+  "auth.password": "Password",
+  "boxError.warning": "Warning",
+  "boxError.error": "Error",
+  "auth.errorMessage":
+    "Login number or password is incorrect. Forgot your password or login number? Contact our Customer Service at 222 010 222. We will be happy to assist you."
 }

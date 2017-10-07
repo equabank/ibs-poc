@@ -1,10 +1,11 @@
 // @flow
-import React, { type ComponentType } from 'react';
+import React, { type ComponentType, type Element } from 'react';
 import Box from './Box';
 import AuthTabs from './AuthTabs';
 import Form from './Form';
 import ValidationError from './ValidationError';
 import Text from './Text';
+import BoxError from './BoxError';
 import Set from './Set';
 import TextInput from './TextInput';
 import { FormattedMessage } from 'react-intl';
@@ -16,7 +17,7 @@ import sitemap from '../lib/sitemap';
 import withMutation, { getClientMutationId } from './withMutation';
 import SigninMutation from '../mutations/SigninMutation';
 import { type SigninMutationResponse } from '../mutations/__generated__/SigninMutation.graphql';
-import { arialFont } from '../themes/fonts';
+import { arialFont, ghoticFont } from '../themes/fonts';
 // import isNumeric from 'validator/lib/isNumeric';
 type OwnProps = {};
 type Props = {
@@ -30,14 +31,14 @@ type Fields = {
 
 type State = {
   pending: boolean,
-  validationErrors: validation.ValidationErrors<Fields>,
+  error: boolean,
 } & Fields;
 
 const initialState = {
   pending: false,
   loginNumber: '',
   password: '',
-  validationErrors: {},
+  error: false,
 };
 
 // Mocked mutate
@@ -63,21 +64,12 @@ class Auth extends React.Component<Props, State> {
       setCookie({ token, userId });
       Router.replace(sitemap.payments.path);
     } else {
-      this.setState({ pending: false });
+      this.setState({ pending: false, error: true });
     }
   };
 
   handleError = (error: ServerLoginErrorResponse) => {
-    this.setState({ pending: false });
-    switch (error.weird.code) {
-      case 123:
-        this.setState({
-          validationErrors: {
-            password: { type: 'wrongPassword' },
-          },
-        });
-        break;
-    }
+    this.setState({ pending: false, error: true });
   };
 
   signIn = () => {
@@ -85,17 +77,6 @@ class Auth extends React.Component<Props, State> {
       loginNumber: this.state.loginNumber.trim(),
       password: this.state.password.trim(),
     };
-
-    const validate = fields => {
-      const loginNumber = validation.loginNumber(fields.loginNumber);
-      if (loginNumber) return { loginNumber };
-    };
-
-    const validationErrors = validate(fields);
-    if (validationErrors) {
-      this.setState({ validationErrors });
-      return;
-    }
 
     const signinInput = {
       email: {
@@ -113,22 +94,21 @@ class Auth extends React.Component<Props, State> {
       this.handleError,
     );
   };
-  //
-  // mutate(fields, onCompleted, onError) {
-  //   setTimeout(() => {
-  //     const userExists = users[fields.loginNumber] === fields.password;
-  //     if (!userExists) {
-  //       onError({ weird: { code: 123 } });
-  //       return;
-  //     }
-  //     onCompleted();
-  //   }, 2000);
-  // }
 
   render() {
-    const { pending, validationErrors } = this.state;
+    const { pending, error } = this.state;
     return (
-      <Box>
+      <Box paddingRight="30px">
+        <BoxError
+          rendered={error}
+          errorMessage={
+            <FormattedMessage
+              id="auth.errorMessage"
+              defaultMessage="Login number or password is incorrect. Forgot your password or login number? Contact our Customer Service at 222 010 222. We will be happy to assist you."
+            />
+          }
+          type="warning"
+        />
         <AuthTabs />
         <Form
           onSubmit={this.signIn}
@@ -145,9 +125,7 @@ class Auth extends React.Component<Props, State> {
         >
           <Set marginBottom="8px">
             <TextInput
-              autoFocus={validationErrors.loginNumber}
               disabled={pending}
-              error={<ValidationError error={validationErrors.loginNumber} />}
               style={{
                 ':focus': { boxShadow: '#06f 0 0 7px' },
                 fontSize: '12px',
@@ -179,9 +157,7 @@ class Auth extends React.Component<Props, State> {
                 <Text>Jen cisla od 0 do 1 prosim</Text>
               )} */}
             <TextInput
-              autoFocus={validationErrors.password}
               disabled={pending}
-              error={<ValidationError error={validationErrors.password} />}
               style={{
                 ':focus': { boxShadow: '#06f 0 0 7px' },
                 fontSize: '12px',
@@ -213,6 +189,7 @@ class Auth extends React.Component<Props, State> {
     );
   }
 }
+
 const AuthWithMutation: ComponentType<OwnProps> = withMutation(Auth);
 
 export default AuthWithMutation;

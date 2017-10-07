@@ -66,12 +66,13 @@ const AdcertBox = () => (
       href="https://www.equabank.cz/hypoteky/refinancovani?cid=IBS_apr_2017_mortgage_p21c810f37"
       target="_blank"
       marginTop="24px"
-    />
-    <Image
-      src="../static/img/login-mortgage.jpg"
-      width="354px"
-      height="178px"
-    />
+    >
+      <Image
+        src="../static/img/login-mortgage.jpg"
+        width="354px"
+        height="178px"
+      />
+    </A>
   </Box>
 );
 // Flex 1 to make footer sticky.
@@ -83,7 +84,7 @@ const Container = ({ children }) => (
 const PageContent = ({ children }) => (
   <Box
     style={{
-      minHeight: '100vh' // make footer sticky
+      minHeight: '100vh', // make footer sticky
     }}
   >
     {children}

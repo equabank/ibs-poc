@@ -56,5 +56,9 @@
   "auth.heading": "Osobní",
   "auth.sme": "Firemní",
   "auth.loginNumber": "Přihlašovací číslo",
-  "auth.password": "Heslo"
+  "auth.password": "Heslo",
+  "boxError.warning": "Upozornění",
+  "boxError.error": "Chyba",
+  "auth.errorMessage":
+    "Zadali jste nesprávné přihlašovací údaje. Zapomněli jste své heslo nebo přihlašovací číslo? Kontaktujte naše Klientské centrum na tel. 222 010 222, kde Vám s přihlášením rádi pomůžeme."
 }
